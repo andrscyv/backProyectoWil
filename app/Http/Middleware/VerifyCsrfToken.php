@@ -17,6 +17,9 @@ class VerifyCsrfToken extends BaseVerifier
     	'/tareas',
     	'/ingreso',
         '/usuario',
-        '/pendientes'
+        '/pendientes',
+        '/bajaTarea',
+        '/agregaTarea',
+        '/insertaComentario'
     ];
 }

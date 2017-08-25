@@ -49,8 +49,8 @@ Route::post('/tareas','ControladorMiembros@tareas');
 //inserta tareas
 Route::get('/agregaTarea','ControladorMiembros@agregaTarea');
 
-//da de baja una tarea
-Route::get('/bajaTarea','ControladorMiembros@bajaTarea');
+//da de baja una tarea **************REVISAR
+Route::post('/bajaTarea','ControladorMiembros@bajaTarea');
 
 //Crea nueva solicitud
 Route::post('/solicitud','ControladorSolicitudes@nuevaSolicitud');
@@ -62,12 +62,18 @@ Route::post('/usuario','ControladorIngreso@ingreso');
 Route::get('/log_out','ControladorIngreso@logOut');
 
 //Carga Pendientes
-Route::post('/pendientes','ControladorMiembros@pendientes');
+Route::get('/pendientes','ControladorMiembros@pendientes');
 
-//Inserta Pendiente 
+//Inserta Pendiente **************REVISAR
 Route::get('/insertaPendiente','ControladorMiembros@insertaPendientes');
 
-//lista nombres
+//lista nombres 
 Route::get('/listaMiembros','ControladorMiembros@listaMiembros');
+
+//CARGA COMENTARISOS *****REVISAR
+
+//Inserta comentario *** REvisar
+Route::post('/insertaComentario','ControladorMiembros@insertaComentario');
+
 
 

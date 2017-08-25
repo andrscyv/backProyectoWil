@@ -7,6 +7,7 @@ use App\Usuario;
 use App\Tarea;
 use App\Pendiente;
 use App\UsuarioPendiente;
+use App\Comentario;
 
 class ControladorMiembros extends Controller
 {
@@ -20,7 +21,7 @@ class ControladorMiembros extends Controller
         return Usuario::join('pendiente_usuarios','usuarios.id','=','pendiente_usuarios.usuario_id')
         				->join('pendientes','pendiente_usuarios.pendiente_id','pendientes.id')
         				->where("usuarios.id",$idUsu)
-        				->select('pendientes.asunto','pendientes.descripcion')
+        				->select('pendientes.asunto','pendientes.descripcion','pendientes.id')
         				->get();
     }
 
@@ -39,7 +40,7 @@ class ControladorMiembros extends Controller
     public function tareas(Request $request){
         $idUsu = session('idUser');
         return Tarea::where('usuario_id',$idUsu)
-                    ->select('titulo','descripcion','fechaEntrega as fechaFin')
+                    ->select('titulo','descripcion','fechaEntrega as fechaFin','id')
                     ->get();
     }
 
@@ -53,6 +54,7 @@ class ControladorMiembros extends Controller
         $tarea->usuario_id = session('idUser');
 
         $tarea->save();
+        return $tarea->titulo;
 
 
     }
@@ -80,6 +82,15 @@ class ControladorMiembros extends Controller
 
     public function listaMiembros(){
         return Usuario::select('nombre')->get();
+    }
+
+    public function insertaComentario(Request $request){
+        $com = new Comentario;
+        $com->pendiente_id = $request->input('idPendiente');
+        $com->usuario_id = session('idUser');   
+        $com->texto = $request->input('texto');
+
+        $com->save();
     }
 
 }
